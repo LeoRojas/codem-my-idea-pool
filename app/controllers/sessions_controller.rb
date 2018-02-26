@@ -5,4 +5,14 @@ class SessionsController < ApplicationController
 
   def signup
   end
+
+  def access_tokens_refresh
+  end
+
+  def create
+  end
+
+  def destroy
+  end
+
 end
