@@ -1,0 +1,17 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  content: MyString
+  impact: 1.5
+  ease: 1.5
+  confidence: 1.5
+  average_score: 1.5
+  user: one
+
+two:
+  content: MyString
+  impact: 1.5
+  ease: 1.5
+  confidence: 1.5
+  average_score: 1.5
+  user: two
