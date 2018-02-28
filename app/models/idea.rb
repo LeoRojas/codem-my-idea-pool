@@ -18,8 +18,21 @@ class Idea < ApplicationRecord
   #   }
   # end
 
+  def as_json options = {}
+    # super(
+    #   :except => [:user_id, :updated_at],
+    # )
+   { :id => id,
+     :content => content,
+     :impact => impact,
+     :ease => ease,
+     :confidence => confidence,
+     :average_score => average_score,
+     :created_at => created_at.to_i,
+   }
+   # merge(options || {})
+  end
   def set_average_score
-    byebug
-    self.average_score = ((impact+ease+confidence)/3.0).round(2)
+    self.average_score = ((impact+ease+confidence)/3.0)
   end
 end
