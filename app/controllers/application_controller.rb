@@ -1,5 +1,5 @@
 class ApplicationController < ActionController::Base
-  # protect_from_forgery with: :exception #commented out for postman tests
+  # protect_from_forgery with: :exception #commented out for postman and cm-quiz tests
   require 'jwt'
 
   def authorize? token
@@ -14,5 +14,17 @@ class ApplicationController < ActionController::Base
     else
       return false
     end
+  end
+
+  def response_401
+    return render json: { status: 401, message: 'Unauthorized', code: 401}, status: 401
+  end
+
+  def valid_password? (password)
+    # VALID_PASSWORD_REGEX = "^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9]).{8,}$"
+    password = password.to_s
+    valid_password = /^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9]).{8,}$/
+    return valid_password.match(password) ? true : false
+    # password.present? && (password =~ valid_password)
   end
 end

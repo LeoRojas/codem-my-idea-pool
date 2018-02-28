@@ -3,10 +3,7 @@ class IdeasController < ApplicationController
   def index
     if authorize? request.headers["X-Access-Token"]
       page = params[:page] ? params[:page] : 1
-      #User.order(:name)
-
       @ideas = Idea.order(:average_score).page(page)
-      # byebug
       return render json: @ideas
     else
       return render json: { status: 401, message: 'Unauthorized', code: 401}, status: 401
@@ -46,6 +43,7 @@ class IdeasController < ApplicationController
     if authorize? request.headers["X-Access-Token"]
       idea = Idea.find(params[:id])
       idea.destroy
+      # None of this worked to reduce the body.size of the response
       # idea.destroy; nil
       # res = render json: {}, status: 204
       # response.body = nil
