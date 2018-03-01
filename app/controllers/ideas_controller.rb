@@ -3,7 +3,7 @@ class IdeasController < ApplicationController
   def index
     if authorize? request.headers["X-Access-Token"]
       page = params[:page] ? params[:page] : 1
-      @ideas = Idea.order(:average_score).page(page)
+      @ideas = Idea.order(average_score: :desc).page(page)
       return render json: @ideas
     else
       return render json: { status: 401, message: 'Unauthorized', code: 401}, status: 401
@@ -32,10 +32,12 @@ class IdeasController < ApplicationController
         idea.update(idea_params)
         return render json: idea, status: :ok
       else
-        return render json: { status: 404, message: 'Not Found', code: 404}
+        # return render json: { status: 404, message: 'Not Found', code: 404}
+        return render json: {}, status: 404
       end
     else
-      return render json: { status: 401, message: 'Unauthorized', code: 401}, status: 401
+      # return render json: { status: 401, message: 'Unauthorized', code: 401}, status: 401
+      return render json: {}, status: 401
     end
   end
 
@@ -51,7 +53,8 @@ class IdeasController < ApplicationController
       # return render :nothing => true, :status => 204
       return render json: {}, status: 204
     else
-      return render json: { status: 401, message: 'Unauthorized', code: 401}, status: 401
+      # return render json: { status: 401, message: 'Unauthorized', code: 401}, status: 401
+      return render json: {}, status: 401
     end
   end
 private
